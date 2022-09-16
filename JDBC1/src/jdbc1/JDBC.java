@@ -5,7 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-// 데이터 반영이 안되면 mysql에서 conneciton연결이 끊긴거니까 다시 켜서 하기
+// 데이터 반영이 안되면 mysql에서 conneciton연결이 끊긴거니까 다시 켜서 하
 public class JDBC {
 
 	public static void main(String[] args) {
