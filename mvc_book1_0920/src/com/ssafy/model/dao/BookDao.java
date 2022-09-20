@@ -81,4 +81,9 @@ public class BookDao {
 			dbUtil.close(pstmt, conn);
 		}
 	}
+	
+	// 3. 책 상세 정보 조회
+	public Book select(String isbn) {
+		String sql = "select * from book where isbn = isbn";
+	}
 }
