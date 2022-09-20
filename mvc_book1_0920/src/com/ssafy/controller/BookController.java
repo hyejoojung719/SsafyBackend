@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -51,9 +52,14 @@ public class BookController extends HttpServlet {
 
 
 	// 책 상세 페이지 조회 처리
-	private void bookDetail(HttpServletRequest request, HttpServletResponse response) {
+	private void bookDetail(HttpServletRequest request, HttpServletResponse response) throws SQLException, ServletException, IOException {
+		System.out.println("상세 페이지");
 		String isbn = request.getParameter("isbn"); 
-		System.out.println("상세 페이지 이동" + isbn);
+		System.out.println("책 번호 : " + isbn);
+		Book book = bookService.select(isbn);
+		
+		request.setAttribute("book", book);
+		request.getRequestDispatcher("/book/bookDetail.jsp").forward(request, response);
 	}
 
 

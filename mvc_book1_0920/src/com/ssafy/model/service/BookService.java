@@ -24,4 +24,8 @@ public class BookService {
 	public int insert(Book book) throws SQLException {
 		return bookDao.insert(book);
 	}
+	
+	public Book select(String isbn) throws SQLException {
+		return bookDao.select(isbn);
+	}
 }

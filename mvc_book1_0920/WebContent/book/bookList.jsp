@@ -21,9 +21,9 @@
     </thead>
     <tbody>
     	<c:forEach items="${requestScope.list}" var="book"> <%-- requestScope은 생략 가능 --%>
-    		<tr>ㅇ
+    		<tr>
     			<td>${book.isbn}</td> <%-- book.getIsbn()과 같은거 jstl에서는 get 뺌 --%>
-    			<td ><a href="${root}/book?action=detail&isbn="+${book.isbn}>${book.title}</a></td>
+    			<td ><a href='${root}/book?action=detail&isbn=${book.isbn}'>${book.title}</a></td>
     			<td>${book.author}</td>
     			<td>${book.price}</td>
     		</tr>

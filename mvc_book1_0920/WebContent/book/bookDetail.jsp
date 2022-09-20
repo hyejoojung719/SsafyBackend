@@ -10,10 +10,11 @@
 	
 	<h1> 책 상세 화면  </h1>
 	
-	<h2> 번호 : </h2>
-	<h2> 제목 : </h2>
-	<h2> 작가 : </h2>
-	<h2> 가격 : </h2>
+	<c:set var="book" value="${requestScope.book}"></c:set>
+	<h2> 번호 : ${book.isbn}</h2>
+	<h2> 제목 : ${book.title}</h2>
+	<h2> 작가 : ${book.author}</h2>
+	<h2> 가격 : ${book.price}</h2>
   
 	<%@ include file="../include/footer.jsp" %>
 </body>
