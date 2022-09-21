@@ -40,6 +40,9 @@ public class BookController extends HttpServlet {
 			case "detail":
 				bookDetail(request, response);
 				break;
+			case "delete":
+				bookDelete(request, response);
+				break;
 			default:
 				break;
 			}
@@ -51,11 +54,23 @@ public class BookController extends HttpServlet {
 	}
 
 
+	// 책 정보 삭제
+	private void bookDelete(HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException {
+		//1. 요청 파라미터 추출 => isbn
+		String isbn = request.getParameter("isbn");
+		
+		//2. DB에서 책 정보 삭제
+		int cnt = bookService.deleteByIsbn(isbn);
+		
+		//3. 삭제 완료 시 책 목록 조회 화면 반환 
+		response.sendRedirect(request.getContextPath() +  "/book?action=list"); // 바로 bookList.jsp로 보내는게 아님(컨트롤러를 안 거치고 가기 때문에 아무것도 안 뜸)
+		
+	}
+
+
 	// 책 상세 페이지 조회 처리
 	private void bookDetail(HttpServletRequest request, HttpServletResponse response) throws SQLException, ServletException, IOException {
-		System.out.println("상세 페이지");
 		String isbn = request.getParameter("isbn"); 
-		System.out.println("책 번호 : " + isbn);
 		Book book = bookService.select(isbn);
 		
 		request.setAttribute("book", book);
@@ -65,7 +80,6 @@ public class BookController extends HttpServlet {
 
 	// 책 목록 조회 요청 처리
 	private void getBookList(HttpServletRequest request, HttpServletResponse response) throws SQLException, ServletException, IOException {
-		System.out.println("책 목록 조회 요청 수신");
 
 		// 1. 책목록 조회 =>  bookService의 selectAll 메소드 호출
 		List<Book> list = bookService.selectAll();
@@ -80,7 +94,6 @@ public class BookController extends HttpServlet {
 
 	// 책 정보 등록
 	private void bookRegist(HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException {
-		System.out.println("책 등록 수신");
 		
 		String isbn = request.getParameter("isbn");
 		String title = request.getParameter("title");

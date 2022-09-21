@@ -28,4 +28,8 @@ public class BookService {
 	public Book select(String isbn) throws SQLException {
 		return bookDao.select(isbn);
 	}
+	
+	public int deleteByIsbn(String isbn) throws SQLException{
+		return bookDao.deleteByIsbn(isbn);
+	}
 }

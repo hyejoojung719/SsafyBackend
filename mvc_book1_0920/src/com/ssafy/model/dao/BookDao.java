@@ -7,7 +7,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.mysql.cj.x.protobuf.MysqlxPrepare.Prepare;
 import com.ssafy.dto.Book;
 import com.ssafy.util.DBUtil;
 
@@ -105,6 +104,25 @@ public class BookDao {
 
 		} finally {
 			dbUtil.close(rs, pstmt, conn);
+		}
+	}
+	
+	// 4. 책 정보 삭제
+	// 반환 타입 1 => 삭제 된 거, 0 => 삭제 안 된거
+	public int deleteByIsbn(String isbn) throws SQLException {
+		String sql = "delete from book where isbn=?";
+		
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		
+		try {
+			conn = dbUtil.getConnection();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, isbn);
+			
+			return pstmt.executeUpdate();
+		} finally {
+			dbUtil.close(pstmt, conn);
 		}
 	}
 

@@ -4,6 +4,27 @@
 <html>
 <head>
 <%@ include file="../include/head.jsp" %>
+<script>
+	window.onload = function(){
+		
+		let deleteBtns = document.querySelectorAll(".deleteBtn");
+		console.log("deleteBtns " + deleteBtns);
+		deleteBtns.forEach(function(el/*, idx, arr*/){
+			console.log("el : " + el);
+			el.addEventListener("click", function(e){
+				console.log("e : " + e);
+				e.preventDefault();
+				
+				let isbn = this.parentNode.parentNode.children[0].innerText;
+				
+				if(confirm("해당 책 정보 삭제하시겠습니까?")){
+					location.href="${root}/book?action=delete&isbn="+isbn;
+				}
+			})
+		})
+		
+	}
+</script>
 </head>
 <body>
 	<%@ include file="../include/nav.jsp" %>
@@ -17,6 +38,7 @@
         <th>제목</th>
         <th>저자 </th>
         <th>가격 </th>
+        <th></th>
       </tr>
     </thead>
     <tbody>
@@ -26,6 +48,7 @@
     			<td ><a href='${root}/book?action=detail&isbn=${book.isbn}'>${book.title}</a></td>
     			<td>${book.author}</td>
     			<td>${book.price}</td>
+    			<td><a class="deleteBtn">삭제</a></td>
     		</tr>
     	</c:forEach>
     </tbody>
