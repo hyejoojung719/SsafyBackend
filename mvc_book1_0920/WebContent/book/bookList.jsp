@@ -15,8 +15,8 @@
 				console.log("e : " + e);
 				e.preventDefault();
 				
-				let isbn = this.parentNode.parentNode.children[0].innerText;
-				
+				let isbn = this.parentNode.parentNode.children[1].children[].innerText;
+					
 				if(confirm("해당 책 정보 삭제하시겠습니까?")){
 					location.href="${root}/book?action=delete&isbn="+isbn;
 				}
