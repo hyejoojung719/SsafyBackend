@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+
+    <script type="text/javascript">
+        async function getUserList(){
+            // 서버에 유저 목록 정보 요청해서 받아와서 console에 출력
+            let data = await fetch("/gson/main", {
+                "method":"get",
+            })
+            let result = await data.json()
+            console.log(result)
+        }
+        
+        async function getUserList2(){
+        	 //서버에 유저 목록 정보 요청해서 받아와서 console에 출력
+            let data = await fetch("/gson/main", {
+                "method":"post",
+                "headers":{
+                    /* "Content-Type":"application/x-www-form-urlencoded" */
+                	"Content-Type" : "applicaion.json" // json 데이터로 보낼 때
+                },
+                /* "body":"abc=30&def=40" */
+                "body" : JSON.stringify({"abc" : 30 }) // json 데이터로 보낼 때
+            })
+            let result = await data.json();
+            console.log(result);
+        }
+        
+       /*  abc 보내기
+       		async function getUserList(){
+            // 서버에 유저 목록 정보 요청해서 받아와서 console에 출력
+            let data = await fetch("/gson/main?abc=30", {
+                "method":"get",	
+            })
+            let result = await data.json()
+            console.log(result)
+        } */
+    </script>
+</head>
+<body>
+    <button type="button" onclick="getUserList2()">유저 목록 정보 가져오기</button>
+</body>
+</html>
